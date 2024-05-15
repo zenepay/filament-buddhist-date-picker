@@ -1,20 +1,11 @@
 <p align="center">
-    <img src="https://github.com/filamentphp/filament/assets/41773797/8d5a0b12-4643-4b5c-964a-56f0db91b90a" alt="Banner" style="width: 100%; max-width: 800px;" />
-</p>
-
-<p align="center">
-    <a href="https://github.com/filamentphp/filament/actions"><img alt="Tests passing" src="https://img.shields.io/badge/Tests-passing-green?style=for-the-badge&logo=github"></a>
-    <a href="https://laravel.com"><img alt="Laravel v10.x" src="https://img.shields.io/badge/Laravel-v10.x-FF2D20?style=for-the-badge&logo=laravel"></a>
-    <a href="https://livewire.laravel.com"><img alt="Livewire v3.x" src="https://img.shields.io/badge/Livewire-v3.x-FB70A9?style=for-the-badge"></a>
-    <a href="https://php.net"><img alt="PHP 8.1" src="https://img.shields.io/badge/PHP-8.1-777BB4?style=for-the-badge&logo=php"></a>
-</p>
-
-<p align="center">
-    <a href="https://trendshift.io/repositories/238" target="_blank"><img src="https://trendshift.io/api/badge/repositories/238" alt="filamentphp%2Ffilament | Trendshift" style="width: 250px; height: 55px;" /></a>
+    <img src="https://github.com/zenepay/filament-buddhist-date-picker/blob/main/laravel_buddhist_cover.png" alt="Banner" style="width: 100%; max-width: 800px;" />
 </p>
 
 
-# Filament Buddhist DatePicker/DateTimePicer Field
+
+
+# Filament Buddhist DatePicker/DateTimePicker Extension
 
 
 This package adds buddhistEra support to filament v3 `DatePicker` and `DateTimePicker`.
@@ -72,3 +63,60 @@ BuddhistDatePicker:make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(fal
 
 The MIT License (MIT)
 
+
+# Filament DatePicker และ DateTimePicker Extension สำหรับ calendar ภาษาไทย และ ปี พุทธศักราช  
+
+
+ใช้สำหรับ Larvavel 10 และ 11 Filament v3 `DatePicker`  `DateTimePicker`.
+
+## การติดตั้ง
+รัน composer ที่ root ไดเร็กทอรีของ Laravel
+
+```bash
+composer require zenepay/filament-buddhist-date-picker
+```
+
+## การใช้งาน
+### 1. กรณีต้องการให้ทุกภาษา เป็น พ.ศ. 
+```php
+
+\Filament\Forms\Components\DatePicker::make('start_date')->buddhist();
+\Filament\Forms\Components\DatePicker::make('start_date')->buddhist();
+
+```
+### 2. กรณีให้ทุกภาษา เป็น ค.ศ ซึ่งจะรองรับ ภาษาไทย ด้วย
+```php
+\Filament\Forms\Components\DatePicker::make('start_at')->buddhist(false);
+\Filament\Forms\Components\DatetimePicker::make('start_at')->buddhist(false);
+```
+### 2. กรณีให้บางภาษา เป็น เป็น พ.ศ นอกนั้นให้เป็น ค.ศ
+```php
+
+\Filament\Forms\Components\DatePicker::make('birth_date')->buddhist(onlyLocales:['th','en']);
+\Filament\Forms\Components\DateTimePicker::make('birth_date')->buddhist(onlyLocales:['th','en']);
+
+```
+### 3. กรณีใช้ชื่อย่อแทนวัน เช่น อ. จ อ พ พฤ ศ ส 
+ให้เซ็ต weekdaysMin เป็น true  หรือให้เป็นแบบสั้น อาทิตย์ จันทร์ อังคาร ให้เซ็ต เป็น false 
+```php
+
+\Filament\Forms\Components\DatePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
+\Filament\Forms\Components\DatetimePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
+```
+หรือใช้แบบ เป็น component ใหม่แทนเลย ก็ใช้แบบนี้ได้
+```php
+// 
+use Zenepay\FilamentBuddhistDatePicker\BuddhistDatePicker;
+BuddhistDatePicker::make('start_date'),
+// or with options
+BuddhistDatePicker:make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(false),
+
+
+## Credits
+
+- [zenepay](https://github.com/zenepay)
+- [All Contributors](../../contributors)
+
+## License
+
+The MIT License (MIT)
