@@ -7,7 +7,7 @@
 
 
 This package adds buddhistEra support to filament v3 `DatePicker` and `DateTimePicker`.
-https://github.com/zenepay/filament-buddhist-date-picker
+https://filamentphp.com/docs/3.x/forms/fields/date-time-picker
 
 ## Installation
 
