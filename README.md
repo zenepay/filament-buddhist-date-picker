@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/zenepay/filament-buddhist-date-picker/blob/main/filament_buddhist_cover.png" alt="Banner" style="width: 100%; max-width: 800px;" />
+    <img src="https://github.com/zenepay/filament-buddhist-date-picker/blob/main/filament_buddhist_cover.png" alt="Banner" style="width: 100%; max-width: 970px;" />
 </p>
 
 
