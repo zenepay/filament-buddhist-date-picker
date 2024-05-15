@@ -1,0 +1,14 @@
+{
+    "dependencies": {
+        "dayjs": "^1.11.2"
+    },
+    "scripts": {
+        "esbuild": "esbuild resources/js/index.js --bundle --minify --outfile=resources/dist/js/buddhist-date-time-picker.js",
+        "build": "node bin/build.js",
+        "watch": "node bin/build.js --dev"
+    },
+    "devDependencies": {
+        "esbuild": "^0.18.15"
+    },
+    "type": "module"
+}
