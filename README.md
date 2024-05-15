@@ -3,12 +3,11 @@
 </p>
 
 
-
-
 # Filament Buddhist DatePicker/DateTimePicker Extension
 
 
 This package adds buddhistEra support to filament v3 `DatePicker` and `DateTimePicker`.
+https://github.com/zenepay/filament-buddhist-date-picker
 
 ## Installation
 
@@ -21,29 +20,38 @@ composer require zenepay/filament-buddhist-date-picker
 ## Usage
 ### 1. For all languages in Buddhist year
 ```php
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 
-\Filament\Forms\Components\DatePicker::make('start_date')->buddhist();
-\Filament\Forms\Components\DatePicker::make('start_date')->buddhist();
+DatePicker::make('start_date')->buddhist();
+DateTimePicker::make('start_date')->buddhist();
 
 ```
 ### 2. For all Thai language in Christian year
 ```php
-\Filament\Forms\Components\DatePicker::make('start_at')->buddhist(false);
-\Filament\Forms\Components\DatetimePicker::make('start_at')->buddhist(false);
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
+
+DatePicker::make('start_at')->buddhist(false);
+DatetimePicker::make('start_at')->buddhist(false);
 ```
 ### 2. For some languages in Buddhist year
 ```php
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 
-\Filament\Forms\Components\DatePicker::make('birth_date')->buddhist(onlyLocales:['th','en']);
-\Filament\Forms\Components\DateTimePicker::make('birth_date')->buddhist(onlyLocales:['th','en']);
+DatePicker::make('birth_date')->buddhist(onlyLocales:['th','en']);
+DateTimePicker::make('birth_date')->buddhist(onlyLocales:['th','en']);
 
 ```
 ### 3. For display weekdays Min or set weekdaysMin:false for weekdays Short format
 
 ```php
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 
-\Filament\Forms\Components\DatePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
-\Filament\Forms\Components\DatetimePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
+DatePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
+DatetimePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
 ```
 You can also use this way
 ```php
@@ -80,14 +88,21 @@ composer require zenepay/filament-buddhist-date-picker
 ### 1. กรณีต้องการให้ทุกภาษา เป็น พ.ศ. 
 ```php
 
-\Filament\Forms\Components\DatePicker::make('start_date')->buddhist();
-\Filament\Forms\Components\DatePicker::make('start_date')->buddhist();
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
+
+DatePicker::make('start_date')->buddhist();
+DateTimePicker::make('start_date')->buddhist();
 
 ```
 ### 2. กรณีให้ทุกภาษา เป็น ค.ศ ซึ่งจะรองรับ ภาษาไทย ด้วย
 ```php
-\Filament\Forms\Components\DatePicker::make('start_at')->buddhist(false);
-\Filament\Forms\Components\DatetimePicker::make('start_at')->buddhist(false);
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
+
+DatePicker::make('birth_date')->buddhist(onlyLocales:['th','en']);
+DateTimePicker::make('birth_date')->buddhist(onlyLocales:['th','en']);
+
 ```
 ### 2. กรณีให้บางภาษา เป็น เป็น พ.ศ นอกนั้นให้เป็น ค.ศ
 ```php
@@ -100,17 +115,21 @@ composer require zenepay/filament-buddhist-date-picker
 ให้เซ็ต weekdaysMin เป็น true  หรือให้เป็นแบบสั้น อาทิตย์ จันทร์ อังคาร ให้เซ็ต เป็น false 
 ```php
 
-\Filament\Forms\Components\DatePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
-\Filament\Forms\Components\DatetimePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
+
+DatePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
+DatetimePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
 ```
 หรือใช้แบบ เป็น component ใหม่แทนเลย ก็ใช้แบบนี้ได้
-```php
-// 
-use Zenepay\FilamentBuddhistDatePicker\BuddhistDatePicker;
-BuddhistDatePicker::make('start_date'),
-// or with options
-BuddhistDatePicker:make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(false),
 
+```php
+use Zenepay\FilamentBuddhistDatePicker\BuddhistDatePicker;
+
+BuddhistDatePicker::make('start_date');
+BuddhistDatePicker:make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(false);
+
+```
 
 ## Credits
 

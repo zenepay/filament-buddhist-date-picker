@@ -37,7 +37,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
     public function bootingPackage()
     {
         FilamentAsset::register([
-            AlpineComponent::make('buddhist-date-time-picker', __DIR__ . '/../resources/dist/js/buddhist-date-time-picker.js'),
+            AlpineComponent::make('buddhist-date-time-picker', __DIR__ . '/../dist/js/buddhist-date-time-picker.js'),
         ], 'zenepay/filament-buddhist-date-picker');
 
         DatePicker::macro('buddhist', function (bool|int|string|array $onlyLocales = [], bool $weekdaysMin = true,) {
