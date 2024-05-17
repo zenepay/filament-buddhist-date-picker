@@ -1,6 +1,6 @@
 <?php
 
-namespace ZenEpay\FilamentBuddhistDatePicker;
+namespace Zenepay\FilamentBuddhistDatePicker;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
@@ -44,8 +44,8 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
             /** @var DatePicker $this */
             $this->native(false);
             $this->view = "filament-buddisht-date-picker::date-time-picker";
-            $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => $weekdaysMin]);
-            //$this->extraAttributes(['data-weekdays-min' => ($weekdaysMin ? 'min' : 'short')], true);
+            $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => (int) $weekdaysMin]);
+
             return $this;
         });
 
@@ -53,8 +53,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
             /** @var DateTimePicker $this */
             $this->native(false);
             $this->view = "filament-buddisht-date-picker::date-time-picker";
-            $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : "$onlyLocales", 'weekdaysMin' => $weekdaysMin]);
-            //$this->extraAttributes(['data-weekdays-min' => ($weekdaysMin ? 'min' : 'short')], true);
+            $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : "$onlyLocales", 'weekdaysMin' => (int) $weekdaysMin]);
         });
     }
 
