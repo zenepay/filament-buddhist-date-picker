@@ -9,7 +9,7 @@
 [![License](http://poser.pugx.org/zenepay/filament-buddhist-date-picker/license)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker) 
 [![PHP Version Require](http://poser.pugx.org/zenepay/filament-buddhist-date-picker/require/php)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker)
 
-This package adds buddhistEra support to filament v3 `DatePicker` and `DateTimePicker`.
+This package adds buddhistEra support to filament v3 `DatePicker` and `DateTimePicker`.<br>
 https://filamentphp.com/docs/3.x/forms/fields/date-time-picker
 
 ## Installation
