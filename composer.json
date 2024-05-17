@@ -1,7 +1,7 @@
 {
   "name": "zenepay/filament-buddhist-date-picker",
   "version": "1.0.0.2",
-  "description": "Laravel Filament DatePicker with Bhuddist Era Replacement Component",
+  "description": "Laravel Filament DatePicker with Bhuddist Era plugin",
   "type": "library",
   "license": "MIT",
   "keywords": [
@@ -21,7 +21,7 @@
     }
   ],
   "require": {
-    "php": "^8.1|^8.2|^8.3",
+    "php": "^8.1",
     "filament/forms": "^3.0",
     "spatie/laravel-package-tools": "^1.15.0"
   },

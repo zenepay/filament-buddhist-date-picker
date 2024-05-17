@@ -1,7 +1,10 @@
 <p align="center">
     <img src="https://github.com/zenepay/filament-buddhist-date-picker/blob/main/filament_buddhist_cover.png" alt="Banner" style="width: 100%; max-width: 970px;" />
 </p>
-
+[![Latest Stable Version](http://poser.pugx.org/zenepay/filament-buddhist-date-picker/v)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker) 
+[![Total Downloads](http://poser.pugx.org/zenepay/filament-buddhist-date-picker/downloads)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker) 
+[![License](http://poser.pugx.org/zenepay/filament-buddhist-date-picker/license)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker) 
+[![PHP Version Require](http://poser.pugx.org/zenepay/filament-buddhist-date-picker/require/php)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker)
 
 # Filament Buddhist DatePicker/DateTimePicker Extension
 
