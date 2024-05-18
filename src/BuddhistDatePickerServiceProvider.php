@@ -15,6 +15,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
 
     public static string $viewNamespace = 'filament-buddisht-date-picker';
 
+
     /*
          * This class is a Package Service Provider
          *
@@ -43,6 +44,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
         DatePicker::macro('buddhist', function (bool|int|string|array $onlyLocales = [], bool $weekdaysMin = true,) {
             /** @var DatePicker $this */
             $this->native(false);
+            $this::$defaultDateTimeDisplayFormat = 'm/d/Y';
             $this->view = "filament-buddisht-date-picker::date-time-picker";
             $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => (int) $weekdaysMin]);
 
@@ -52,6 +54,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
         DateTimePicker::macro('buddhist', function (bool|int|string|array $onlyLocales = '', bool $weekdaysMin = false,) {
             /** @var DateTimePicker $this */
             $this->native(false);
+            $this::$defaultDateTimeDisplayFormat = 'm/d/Y';
             $this->view = "filament-buddisht-date-picker::date-time-picker";
             $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : "$onlyLocales", 'weekdaysMin' => (int) $weekdaysMin]);
         });

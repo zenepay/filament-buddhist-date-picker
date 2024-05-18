@@ -8,8 +8,13 @@ use Filament\Forms\Components\DateTimePicker;
 class BuddhistDatePicker extends DateTimePicker
 {
     protected string $view = 'filament-buddisht-date-picker::date-time-picker';
+
     private bool|string $onlyLocales = true;
+
     private bool $weekdaysMin = true;
+
+    public static string $defaultDateDisplayFormat = 'd/m/Y';
+
     public function hasTime(): bool
     {
         return false;
@@ -23,6 +28,7 @@ class BuddhistDatePicker extends DateTimePicker
             'weekdaysMin' => (int) $this->weekdaysMin,
             'onlyLocales' => (int) $this->onlyLocales
         ], true);
+        $this->suffixIcon('heroicon-o-calendar', isInline: true);
     }
 
     public function onlyLocales(array $onlyLocales = []): static
@@ -35,7 +41,6 @@ class BuddhistDatePicker extends DateTimePicker
     public function weekdaysMin(bool $weekdaysMin = true): static
     {
         $this->weekdaysMin = $weekdaysMin;
-        $onlyLocales = $this->onlyLocales;
         $this->extraAttributes(['weekdaysMin' => (int) $this->weekdaysMin, 'onlyLocales' => $this->onlyLocales], false);
         return $this;
     }

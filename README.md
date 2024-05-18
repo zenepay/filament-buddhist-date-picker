@@ -57,13 +57,25 @@ DatePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true)
 DatetimePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
 ```
 You can also use this way
-```php
-// 
-use Zenepay\FilamentBuddhistDatePicker\BuddhistDatePicker;
-BuddhistDatePicker::make('start_date'),
-// or with options
-BuddhistDatePicker:make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(false),
 
+```php
+use Zenepay\FilamentBuddhistDatePicker\BuddhistDatePicker;
+
+BuddhistDatePicker::make('start_date');
+BuddhistDatePicker::make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(false);
+
+```
+
+Or make alias to DatePicker and replace use Filament\Forms\Components\DatePicker to use Zenepay\FilamentBuddhistDatePicker\BuddhistDatePicker as DatePicker
+```php
+//use Filament\Forms\Components\DatePicker -->
+use Zenepay\FilamentBuddhistDatePicker\BuddhistDatePicker as DatePicker;
+
+
+DatePicker::make('start_date');
+DatePicker::make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(false);
+
+```
 
 ## Credits
 
@@ -130,7 +142,19 @@ DatetimePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:t
 use Zenepay\FilamentBuddhistDatePicker\BuddhistDatePicker;
 
 BuddhistDatePicker::make('start_date');
-BuddhistDatePicker:make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(false);
+BuddhistDatePicker::make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(false);
+
+```
+หรือเปลี่ยน การใช้ use Filament\Forms\Components\DatePicker เป็น ใช้ use Zenepay\FilamentBuddhistDatePicker\BuddhistDatePicker as DatePicker แทน
+เพื่อไม่ต้องไล่แก้ ใส่ buddhist() แต่ละ DatePicker component ในหน้านั้น
+
+```php
+//use Filament\Forms\Components\DatePicker -->
+use Zenepay\FilamentBuddhistDatePicker\BuddhistDatePicker as DatePicker;
+
+
+DatePicker::make('start_date');
+DatePicker::make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(false);
 
 ```
 
