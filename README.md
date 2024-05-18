@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/zenepay/filament-buddhist-date-picker/blob/main/resources/images/filament_buddhist_cover.png" alt="Banner" style="width: 100%; max-width: 970px;" />
+    <img src="resources/images/filament_buddhist_cover.png" alt="Banner" style="width: 100%; max-width: 970px;" />
 </p>
 
 # Filament Buddhist DatePicker/DateTimePicker Extension
@@ -87,7 +87,7 @@ DatetimePicker::make('start_at')->hourMode(12)->displayFormat('d/m/y h:i A')->se
 
 ```
 <p align="center">
-    <img src="https://github.com/zenepay/filament-buddhist-date-picker/blob/main/resources/images/datetime_am_pm.png" alt="Banner" style="width: 400px;" />
+    <img src="resources/images/datetime_am_pm.png" alt="Banner" style="width: 300px;" />
 </p>
 ## Demo & Show Case
 
