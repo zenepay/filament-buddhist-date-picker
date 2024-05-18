@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/zenepay/filament-buddhist-date-picker/blob/main/filament_buddhist_cover.png" alt="Banner" style="width: 100%; max-width: 970px;" />
+    <img src="https://github.com/zenepay/filament-buddhist-date-picker/blob/main/resources/images/filament_buddhist_cover.png" alt="Banner" style="width: 100%; max-width: 970px;" />
 </p>
 
 # Filament Buddhist DatePicker/DateTimePicker Extension
@@ -76,6 +76,24 @@ DatePicker::make('start_date');
 DatePicker::make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(false);
 
 ```
+
+### 4. For who might love AM/PM hour mode
+For Datetime format with AM PM 12H, which was available at https://github.com/filamentphp/filament/pull/6441, now it can be combined with Buddhist Era as optional.
+```php
+use Filament\Forms\Components\DateTimePicker;
+
+DatetimePicker::make('start_at')->hourMode(12)->displayFormat('d/m/y h:i A')->seconds(false); // 15/02/24 11:10 PM 
+
+
+```
+<p align="center">
+    <img src="https://github.com/zenepay/filament-buddhist-date-picker/blob/main/resources/images/datetime_am_pm.png" alt="Banner" style="width: 400px;" />
+</p>
+## Demo & Show Case
+
+- [Water Billing](https://zoploen.com/demo/meterbill/office)
+- user login: demo@example.com
+- password: demo1234
 
 ## Credits
 
@@ -157,6 +175,20 @@ DatePicker::make('start_date');
 DatePicker::make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(false);
 
 ```
+### 4. For who might love AM/PM hour mode
+For Datetime format with AM PM 12H, which was available at https://github.com/filamentphp/filament/pull/6441, now it can be combined with Buddhist Era as optional.
+```php
+use Filament\Forms\Components\DateTimePicker;
+
+DatetimePicker::make('start_at')->hourMode(12)->displayFormat('d/m/y h:i A')->seconds(false); // 15/02/24 11:10 PM 
+
+
+```
+## Demo & Show Case
+
+- [Water Billing](https://zoploen.com/demo/meterbill/office)
+- user login: demo@example.com
+- password: demo1234
 
 ## Credits
 

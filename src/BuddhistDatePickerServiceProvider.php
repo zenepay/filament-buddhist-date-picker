@@ -8,12 +8,15 @@ use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Facades\FilamentAsset;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Closure;
 
 class BuddhistDatePickerServiceProvider extends PackageServiceProvider
 {
     public static string $name = 'filament-buddhist-date-picker';
 
     public static string $viewNamespace = 'filament-buddisht-date-picker';
+
+    protected int | Closure | null $hourMode = 24;
 
 
     /*
@@ -45,20 +48,39 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
             /** @var DatePicker $this */
             $this->native(false);
             $this::$defaultDateTimeDisplayFormat = 'm/d/Y';
+            $hourMode = empty($this->getExtraAttributes()['hourMode']) ? 24 : $this->getExtraAttributes()['hourMode'];
             $this->view = "filament-buddisht-date-picker::date-time-picker";
-            $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => (int) $weekdaysMin]);
+            $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => (int) $weekdaysMin, 'hourMode' => $hourMode]);
 
             return $this;
         });
 
-        DateTimePicker::macro('buddhist', function (bool|int|string|array $onlyLocales = '', bool $weekdaysMin = false,) {
+        DateTimePicker::macro('buddhist', function (bool|int|string|array $onlyLocales = '', bool $weekdaysMin = true) {
             /** @var DateTimePicker $this */
             $this->native(false);
-            $this::$defaultDateTimeDisplayFormat = 'm/d/Y';
+            $this::$defaultDateTimeDisplayFormat = 'm/d/Y H:i:s';
+            //$hourMode = $this->getExtraAttributes()['hourMode'] ?? 24;
+            $hourMode = empty($this->getExtraAttributes()['hourMode']) ? 24 : $this->getExtraAttributes()['hourMode'];
             $this->view = "filament-buddisht-date-picker::date-time-picker";
-            $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : "$onlyLocales", 'weekdaysMin' => (int) $weekdaysMin]);
+
+            $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => (int) $weekdaysMin, 'hourMode' => $hourMode]);
+            return $this;
+        });
+
+        DateTimePicker::macro('hourMode', function (int | Closure | null $hourMode = 12) {
+            /** @var DateTimePicker $this */
+            $this->native(false);
+            $this::$defaultDateTimeDisplayFormat = 'd/m/y h:i A';
+            // $this::$hasSeconds = false;
+            $onlyLocales = $this->getExtraAttributes()['onlyLocales'] ?? 0;
+            $weekdaysMin = $this->getExtraAttributes()['onlyLocales'] ?? 1;
+            // $this->closeOnDateSelection(true);
+            $this->view = "filament-buddisht-date-picker::date-time-picker";
+            $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => (int) $weekdaysMin, 'hourMode' => $hourMode]);
+            return $this;
         });
     }
+
 
     /**
      * @return array<string>

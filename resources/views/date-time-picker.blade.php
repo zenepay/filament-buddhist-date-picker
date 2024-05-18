@@ -71,6 +71,7 @@
                     state: $wire.{{ $applyStateBindingModifiers("\$entangle('{$statePath}')") }},
                     onlyLocales: '{{ $getExtraAttributes()['onlyLocales'] }}',
                     weekdaysMin: '{{ $getExtraAttributes()['weekdaysMin'] }}',
+                    hourMode: {{ $getExtraAttributes()['hourMode'] }},
                 })" x-on:keydown.esc="isOpen() && $event.stopPropagation()"
                 {{ $attributes->merge($getExtraAttributes(), escape: false)->merge($getExtraAlpineAttributes(), escape: false)->class(['fi-fo-date-time-picker']) }}>
                 <input x-ref="maxDate" type="hidden" value="{{ $maxDate }}" />
@@ -140,18 +141,21 @@
                                         x-bind:class="{
                                             'text-gray-950 dark:text-white': !dayIsToday(day) && !dayIsSelected(day),
                                             'cursor-pointer': !dayIsDisabled(day),
-                                            'text-primary-600 dark:text-primary-400': dayIsToday(day) &&
+                                            'bg-primary-50 text-primary-600 dark:bg-primary-100 dark:text-primary-400': dayIsToday(
+                                                    day) &&
                                                 !dayIsSelected(day) &&
                                                 focusedDate.date() !== day &&
                                                 !dayIsDisabled(day),
-                                            'bg-gray-50 dark:bg-white/5': focusedDate.date() === day &&
+                                            'bg-primary-200 dark:text-gray-600': focusedDate.date() ===
+                                                day &&
                                                 !dayIsSelected(day) &&
                                                 !dayIsDisabled(day),
-                                            'text-primary-600 bg-gray-50 dark:bg-white/5 dark:text-primary-400': dayIsSelected(
+                                            'bg-primary-500 text-white': dayIsSelected(
                                                 day),
-                                            'pointer-events-none': dayIsDisabled(day),
+                                            'pointer-events-none cursor-not-allowed': dayIsDisabled(day),
                                             'opacity-50': dayIsDisabled(day),
                                         }"
+                                        x-bind:dusk="'filament.forms.{{ $getStatePath() }}' + '.focusedDate.' + day"
                                         class="text-sm leading-loose text-center transition duration-75 rounded-full">
                                     </div>
                                 </template>
@@ -159,27 +163,39 @@
                         @endif
 
                         @if ($hasTime)
-                            <div class="flex items-center justify-center rtl:flex-row-reverse">
-                                <input max="23" min="0" step="{{ $getHoursStep() }}" type="number"
-                                    inputmode="numeric" x-model.debounce="hour"
-                                    class="w-10 p-0 text-sm text-center bg-transparent border-none me-1 text-gray-950 focus:ring-0 dark:text-white" />
+                            <div
+                                class="flex items-center justify-center py-2 rounded-lg rtl:flex-row-reverse g-gray-50">
+                                <input max="{{ $getExtraAttributes()['hourMode'] == 12 ? 12 : 23 }}"
+                                    min="{{ $getExtraAttributes()['hourMode'] == 12 ? 1 : 0 }}"
+                                    step="{{ $getHoursStep() }}" type="number" inputmode="numeric"
+                                    x-model.debounce="hour"
+                                    class="w-10 p-0 pr-1 text-xl text-center text-gray-700 bg-transparent border-none me-1 focus:ring-0 dark:text-white" />
 
-                                <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                <span class="text-xl font-medium text-gray-500 dark:text-gray-400">
                                     :
                                 </span>
 
                                 <input max="59" min="0" step="{{ $getMinutesStep() }}" type="number"
                                     inputmode="numeric" x-model.debounce="minute"
-                                    class="w-10 p-0 text-sm text-center bg-transparent border-none me-1 text-gray-950 focus:ring-0 dark:text-white" />
+                                    class="w-10 p-0 pr-1 text-xl text-center text-gray-700 bg-transparent border-none me-1 focus:ring-0 dark:text-white" />
 
                                 @if ($hasSeconds())
-                                    <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                    <span class="text-xl font-medium text-gray-700 bg-transparent dark:text-white">
                                         :
                                     </span>
 
                                     <input max="59" min="0" step="{{ $getSecondsStep() }}" type="number"
                                         inputmode="numeric" x-model.debounce="second"
-                                        class="w-10 p-0 text-sm text-center bg-transparent border-none me-1 text-gray-950 focus:ring-0 dark:text-white" />
+                                        class="w-10 p-0 pr-1 text-xl text-center text-gray-700 bg-transparent border-none me-1 focus:ring-0 dark:text-white" />
+                                @endif
+                                @if ($getExtraAttributes()['hourMode'] == 12)
+                                    <select x-model.debounce="meridiem"
+                                        dusk="filament.forms.{{ $getStatePath() }}.meridiem"
+                                        style="background-image:none"
+                                        class="px-1 py-0 text-lg font-medium text-gray-700 bg-transparent border-none outline-none cursor-pointer focus:ring-0 dark:text-white">
+                                        <option value="am">AM</option>
+                                        <option value="pm">PM</option>
+                                    </select>
                                 @endif
                             </div>
                         @endif

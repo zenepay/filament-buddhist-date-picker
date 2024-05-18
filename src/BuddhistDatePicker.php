@@ -3,6 +3,8 @@
 namespace Zenepay\FilamentBuddhistDatePicker;
 
 use Closure;
+use DateTime;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 
 class BuddhistDatePicker extends DateTimePicker
@@ -26,7 +28,8 @@ class BuddhistDatePicker extends DateTimePicker
         $this->native(false);
         $this->extraAttributes([
             'weekdaysMin' => (int) $this->weekdaysMin,
-            'onlyLocales' => (int) $this->onlyLocales
+            'onlyLocales' => (int) $this->onlyLocales,
+            'hourMode' => 24,
         ], true);
         $this->suffixIcon('heroicon-o-calendar', isInline: true);
     }
@@ -34,14 +37,14 @@ class BuddhistDatePicker extends DateTimePicker
     public function onlyLocales(array $onlyLocales = []): static
     {
         $this->onlyLocales = is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales);
-        $this->extraAttributes(['onlyLocales' => $this->onlyLocales, 'weekdaysMin' => (int) $this->weekdaysMin], false);
+        $this->extraAttributes(['onlyLocales' => $this->onlyLocales, 'weekdaysMin' => (int) $this->weekdaysMin, 'hourMode' => 24], false);
         return $this;
     }
 
     public function weekdaysMin(bool $weekdaysMin = true): static
     {
         $this->weekdaysMin = $weekdaysMin;
-        $this->extraAttributes(['weekdaysMin' => (int) $this->weekdaysMin, 'onlyLocales' => $this->onlyLocales], false);
+        $this->extraAttributes(['weekdaysMin' => (int) $this->weekdaysMin, 'onlyLocales' => $this->onlyLocales, 'hourMode' => 24], false);
         return $this;
     }
 }

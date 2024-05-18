@@ -22,6 +22,7 @@ export default function buddhistDateTimePickerFormComponent({
   state,
   onlyLocales,
   weekdaysMin,
+  hourMode,
 }) {
   const timezone = dayjs.tz.guess();
 
@@ -52,6 +53,8 @@ export default function buddhistDateTimePickerFormComponent({
 
     months: [],
 
+    meridiem: "am",
+
     init: function () {
       dayjs.locale(locales[locale] ?? locales["en"]);
 
@@ -69,10 +72,16 @@ export default function buddhistDateTimePickerFormComponent({
       ) {
         date = null;
       }
-
-      this.hour = date?.hour() ?? 0;
+      if (!Number.isInteger(hourMode)) {
+        hourMode = 24;
+      }
+      console.log("hourMode:" + hourMode);
+      this.hour =
+        hourMode == 24 ? date?.hour() ?? 0 : (date?.hour() ?? 0) % 12 || 12; //date?.hour() ?? 0;
       this.minute = date?.minute() ?? 0;
       this.second = date?.second() ?? 0;
+      this.meridiem = date?.hour() >= 12 ? "pm" : "am";
+
       this.setDisplayText();
       this.setMonths();
       this.setDayLabels();
@@ -142,12 +151,25 @@ export default function buddhistDateTimePickerFormComponent({
 
         if (!Number.isInteger(hour)) {
           this.hour = 0;
-        } else if (hour > 23) {
-          this.hour = 0;
-        } else if (hour < 0) {
-          this.hour = 23;
+          hour = 0;
+        }
+
+        if (hourMode == 24) {
+          if (hour > 23) {
+            this.hour = 0;
+          } else if (hour < 0) {
+            this.hour = 23;
+          } else {
+            this.hour = hour;
+          }
         } else {
-          this.hour = hour;
+          if (hour <= 0) {
+            this.hour = 12;
+          } else if (hour > 12) {
+            this.hour = hour % 12 || 12;
+          } else {
+            this.hour = hour;
+          }
         }
 
         if (this.isClearingState) {
@@ -203,6 +225,16 @@ export default function buddhistDateTimePickerFormComponent({
         this.setState(date.second(this.second ?? 0));
       });
 
+      this.$watch("meridiem", () => {
+        if (this.isClearingState) {
+          return;
+        }
+
+        let date = this.getSelectedDate() ?? this.focusedDate;
+
+        this.setState(date.hour(this.hour ?? 0));
+      });
+
       this.$watch("state", () => {
         if (this.state === undefined) {
           return;
@@ -224,7 +256,7 @@ export default function buddhistDateTimePickerFormComponent({
         }
 
         const newHour = date?.hour() ?? 0;
-        if (this.hour !== newHour) {
+        if (hourMode == 24 && this.hour !== newHour) {
           this.hour = newHour;
         }
 
@@ -413,6 +445,7 @@ export default function buddhistDateTimePickerFormComponent({
       if (this.isBuddhistYear(onlyLocales)) {
         displayFormat = displayFormat.replace(/YY/g, "BB");
       }
+
       this.displayText = this.getSelectedDate()
         ? this.getSelectedDate().format(displayFormat)
         : "";
@@ -459,9 +492,20 @@ export default function buddhistDateTimePickerFormComponent({
       if (this.dateIsDisabled(date)) {
         return;
       }
+      console.log("meridiem:" + this.meridiem);
+      let hour = 0;
+      if (hourMode == 24) {
+        hour = this.hour ?? 0;
+      } else {
+        if (this.meridiem == "am") {
+          hour = this.hour == 12 ? 0 : this.hour;
+        } else {
+          hour = this.hour != 12 ? this.hour + 12 : this.hour;
+        }
+      }
 
       this.state = date
-        .hour(this.hour ?? 0)
+        .hour(hour ?? 0)
         .minute(this.minute ?? 0)
         .second(this.second ?? 0)
         .format("YYYY-MM-DD HH:mm:ss");
