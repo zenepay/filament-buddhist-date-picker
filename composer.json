@@ -48,10 +48,7 @@
     "laravel": {
       "providers": [
         "Zenepay\\FilamentBuddhistDatePicker\\BuddhistDatePickerServiceProvider"
-      ],
-      "aliases": {
-        "FilamentBuddhistDatePicker": "Zenepay\\FilamentBuddhistDatePicker\\Facades\\FilamentBuddhistDatePicker"
-      }
+      ]
     }
   },
   "minimum-stability": "dev",

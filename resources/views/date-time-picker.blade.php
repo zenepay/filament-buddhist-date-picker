@@ -57,7 +57,7 @@
                     escape: false,
                 )" />
         @else
-            <div x-ignore
+            <div x-ignore wire:ignore
                 @if (FilamentView::hasSpaMode()) ax-load="visible"
                 @else
                     ax-load @endif
