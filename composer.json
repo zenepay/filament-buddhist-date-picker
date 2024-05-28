@@ -22,7 +22,8 @@
   "require": {
     "php": "^8.1|^8.2",
     "filament/forms": "^3.0",
-    "spatie/laravel-package-tools": "^1.15.0"
+    "spatie/laravel-package-tools": "^1.15.0",
+    "blade-ui-kit/blade-heroicons": "^2.3"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0|~5.0"

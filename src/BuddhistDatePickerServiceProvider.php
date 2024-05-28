@@ -9,6 +9,9 @@ use Filament\Support\Facades\FilamentAsset;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Closure;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Support\Carbon;
 
 class BuddhistDatePickerServiceProvider extends PackageServiceProvider
 {
@@ -51,7 +54,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
             $hourMode = empty($this->getExtraAttributes()['hourMode']) ? 24 : $this->getExtraAttributes()['hourMode'];
             $this->view = "filament-buddisht-date-picker::date-time-picker";
             $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => (int) $weekdaysMin, 'hourMode' => $hourMode]);
-
+            $this->suffixIcon('heroicon-o-calendar', isInline: true);
             return $this;
         });
 
@@ -77,16 +80,46 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
             // $this->closeOnDateSelection(true);
             $this->view = "filament-buddisht-date-picker::date-time-picker";
             $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => (int) $weekdaysMin, 'hourMode' => $hourMode]);
+            $this->suffixIcon('heroicon-o-calendar', isInline: true);
+            return $this;
+        });
+
+        TextColumn::macro('buddhistDate', function (?string $format = null, bool|array $onlyLocales = true, ?string $timezone = null) {
+            /** @var TextColumn $this */
+            $this->isDate = true;
+
+            $format ??= Table::$defaultDateDisplayFormat;
+            BuddhistDatePickerServiceProvider::formatBuddhistDateTime($this, $format, $onlyLocales, $timezone);
+            return $this;
+        });
+
+        TextColumn::macro('buddhistDateTime', function (?string $format = null, bool|array $onlyLocales = true, ?string $timezone = null) {
+            /** @var TextColumn $this */
+            $this->isDateTime = true;
+
+            $format ??= Table::$defaultDateTimeDisplayFormat;
+            $this->formatBuddhistDateTime($this, $format, $onlyLocales, $timezone);
+
             return $this;
         });
     }
 
-
-    /**
-     * @return array<string>
-     */
-    protected function getRoutes(): array
+    public static function formatBuddhistDateTime(TextColumn $column, ?string $format = null, bool|int|array $onlyLocales = true, ?string $timezone = null)
     {
-        return [];
+        $column->formatStateUsing(static function (TextColumn $column, $state) use ($format, $onlyLocales, $timezone): ?string {
+            if (blank($state)) {
+                return null;
+            }
+            if ((is_array($onlyLocales) && in_array(app()->getLocale(), $onlyLocales)) || $onlyLocales === true) {
+                $year = Carbon::parse($state)->format('Y') + 543;
+                $shortYear = Carbon::parse($state)->format('y') + 43;
+                $format = str_replace('Y', $year, $format); // d/m/2567
+                $format = str_replace('y', $shortYear, $format); // d/m/67
+            }
+            return Carbon::parse($state)
+                ->setTimezone($timezone ?? $column->getTimezone())
+                ->translatedFormat($format);
+        });
+        //return $column;
     }
 }
