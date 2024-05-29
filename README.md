@@ -53,7 +53,7 @@ DateTimePicker::make('birth_date')->buddhist(onlyLocales:['th','en']);
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 
-DatePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
+DatePicker::make('start_at')->buddhist(lyLocales:on['th','en'],weekdaysMin:true);
 DatetimePicker::make('start_at')->buddhist(onlyLocales:['th','en'],weekdaysMin:true);
 ```
 You can also use this way
@@ -83,6 +83,14 @@ For Datetime format with AM PM 12H, which was available at https://github.com/fi
 use Filament\Forms\Components\DateTimePicker;
 
 DatetimePicker::make('start_at')->hourMode(12)->displayFormat('d/m/y h:i A')->seconds(false); // 15/02/24 11:10 PM 
+
+
+```
+### 5. Use Buddhist Era in TextColumn in table
+This can be done by replace $table->date() with $table->buddhistDate() for dateTime replace with $table->buddhistDateTime()
+```php
+
+TextColumn::make('start_at')->buddhistDate(format:'m/d/Y',onlyLocales:['th']); // 15/02/2567
 
 
 ```
