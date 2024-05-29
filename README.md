@@ -192,6 +192,15 @@ DatetimePicker::make('start_at')->hourMode(12)->displayFormat('d/m/y h:i A')->se
 
 
 ```
+
+### 5. Use Buddhist Era in TextColumn in table
+This can be done by replace $table->date() with $table->buddhistDate() for dateTime replace with $table->buddhistDateTime()
+```php
+
+TextColumn::make('start_at')->buddhistDate(format:'m/d/Y',onlyLocales:['th']); // 15/02/2567
+
+
+```
 ## Demo & Show Case
 
 - [Water Billing](https://zoploen.com/demo/meterbill/office)
