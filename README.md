@@ -204,9 +204,11 @@ TextColumn::make('start_at')->buddhistDate(format:'m/d/Y',onlyLocales:['th']); /
 
 
 ```
+## Test
+./vendor/bin/pest 
 ## Demo & Show Case
 
-- [Water Billing](https://zoploen.com/demo/meterbill/office)
+- [Water Billing](https://demo.zoploen.com/meterbill)
 - user login: demo@example.com
 - password: demo1234
 
