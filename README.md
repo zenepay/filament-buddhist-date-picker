@@ -99,6 +99,8 @@ TextColumn::make('start_at')->buddhistDate(format:'m/d/Y',onlyLocales:['th']); /
 
 
 ```
+## Test
+./vendor/bin/pest ./tests
 
 ## Demo & Show Case
 
@@ -205,7 +207,7 @@ TextColumn::make('start_at')->buddhistDate(format:'m/d/Y',onlyLocales:['th']); /
 
 ```
 ## Test
-./vendor/bin/pest 
+./vendor/bin/pest ./tests
 ## Demo & Show Case
 
 - [Water Billing](https://demo.zoploen.com/meterbill)
