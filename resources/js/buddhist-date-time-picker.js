@@ -75,7 +75,7 @@ export default function buddhistDateTimePickerFormComponent({
       if (!Number.isInteger(hourMode)) {
         hourMode = 24;
       }
-      console.log("hourMode:" + hourMode);
+      //console.log("hourMode:" + hourMode);
       this.hour =
         hourMode == 24 ? date?.hour() ?? 0 : (date?.hour() ?? 0) % 12 || 12; //date?.hour() ?? 0;
       this.minute = date?.minute() ?? 0;
@@ -372,7 +372,7 @@ export default function buddhistDateTimePickerFormComponent({
     },
 
     getDayLabels: function () {
-      console.log("weekdaysMin:" + weekdaysMin);
+      // console.log("weekdaysMin:" + weekdaysMin);
       const labels =
         weekdaysMin == 1 ? dayjs.weekdaysMin() : dayjs.weekdaysShort();
 
@@ -492,7 +492,7 @@ export default function buddhistDateTimePickerFormComponent({
       if (this.dateIsDisabled(date)) {
         return;
       }
-      console.log("meridiem:" + this.meridiem);
+      //console.log("meridiem:" + this.meridiem);
       let hour = 0;
       if (hourMode == 24) {
         hour = this.hour ?? 0;
@@ -518,7 +518,7 @@ export default function buddhistDateTimePickerFormComponent({
     },
 
     isBuddhistYear: function (onlyLocales = "") {
-      console.log("onlyLocales:" + onlyLocales);
+      // console.log("onlyLocales:" + onlyLocales);
       if (onlyLocales === "" || onlyLocales == 1) {
         return true;
       } else {
