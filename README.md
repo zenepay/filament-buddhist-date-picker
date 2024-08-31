@@ -4,10 +4,10 @@
 
 # Filament Buddhist DatePicker/DateTimePicker Extension
 
-[![Latest Stable Version](http://poser.pugx.org/zenepay/filament-buddhist-date-picker/v)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker)
-[![Total Downloads](http://poser.pugx.org/zenepay/filament-buddhist-date-picker/downloads)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker) 
-[![License](http://poser.pugx.org/zenepay/filament-buddhist-date-picker/license)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker) 
-[![PHP Version Require](http://poser.pugx.org/zenepay/filament-buddhist-date-picker/require/php)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker)
+[![Latest Stable Version](https://poser.pugx.org/zenepay/filament-buddhist-date-picker/v)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker)
+[![Total Downloads](https://poser.pugx.org/zenepay/filament-buddhist-date-picker/downloads)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker)
+[![License](https://poser.pugx.org/zenepay/filament-buddhist-date-picker/license)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker)
+[![PHP Version Require](https://poser.pugx.org/zenepay/filament-buddhist-date-picker/require/php)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker)
 
 This package adds buddhistEra support to filament v3 `DatePicker` and `DateTimePicker`.<br>
 https://filamentphp.com/docs/3.x/forms/fields/date-time-picker
@@ -82,7 +82,7 @@ For Datetime format with AM PM 12H, which was available at https://github.com/fi
 ```php
 use Filament\Forms\Components\DateTimePicker;
 
-DatetimePicker::make('start_at')->hourMode(12)->displayFormat('d/m/y h:i A')->seconds(false); // 15/02/24 11:10 PM 
+DatetimePicker::make('start_at')->hourMode(12)->displayFormat('d/m/y h:i A')->seconds(false); // 15/02/24 11:10 PM
 
 
 ```
@@ -118,7 +118,7 @@ TextColumn::make('start_at')->buddhistDate(format:'m/d/Y',onlyLocales:['th']); /
 The MIT License (MIT)
 
 
-# Filament DatePicker และ DateTimePicker Extension สำหรับ calendar ภาษาไทย และ ปี พุทธศักราช  
+# Filament DatePicker และ DateTimePicker Extension สำหรับ calendar ภาษาไทย และ ปี พุทธศักราช
 
 
 ใช้สำหรับ Larvavel 10 และ 11 Filament v3 `DatePicker`  `DateTimePicker`.
@@ -131,7 +131,7 @@ composer require zenepay/filament-buddhist-date-picker
 ```
 
 ## การใช้งาน
-### 1. กรณีต้องการให้ทุกภาษา เป็น พ.ศ. 
+### 1. กรณีต้องการให้ทุกภาษา เป็น พ.ศ.
 ```php
 
 use Filament\Forms\Components\DatePicker;
@@ -157,8 +157,8 @@ DateTimePicker::make('birth_date')->buddhist(onlyLocales:['th','en']);
 \Filament\Forms\Components\DateTimePicker::make('birth_date')->buddhist(onlyLocales:['th','en']);
 
 ```
-### 3. กรณีใช้ชื่อย่อแทนวัน เช่น อ. จ อ พ พฤ ศ ส 
-ให้เซ็ต weekdaysMin เป็น true  หรือให้เป็นแบบสั้น อาทิตย์ จันทร์ อังคาร ให้เซ็ต เป็น false 
+### 3. กรณีใช้ชื่อย่อแทนวัน เช่น อ. จ อ พ พฤ ศ ส
+ให้เซ็ต weekdaysMin เป็น true  หรือให้เป็นแบบสั้น อาทิตย์ จันทร์ อังคาร ให้เซ็ต เป็น false
 ```php
 
 use Filament\Forms\Components\DatePicker;
@@ -193,7 +193,7 @@ For Datetime format with AM PM 12H, which was available at https://github.com/fi
 ```php
 use Filament\Forms\Components\DateTimePicker;
 
-DatetimePicker::make('start_at')->hourMode(12)->displayFormat('d/m/y h:i A')->seconds(false); // 15/02/24 11:10 PM 
+DatetimePicker::make('start_at')->hourMode(12)->displayFormat('d/m/y h:i A')->seconds(false); // 15/02/24 11:10 PM
 
 
 ```
