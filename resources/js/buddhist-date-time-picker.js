@@ -108,22 +108,21 @@ export default function buddhistDateTimePickerFormComponent({
         if (!this.focusedYear || this.focusedYear?.length !== 4) {
           return;
         }
-
-        if (this.isBuddhistYear(exceptLocales)) {
-          // zenepay:if buddist convert to christ this gets from the form input
-          this.focusedYear = +this.focusedYear - 543;
-        }
-
         let year = +this.focusedYear;
+
+        if (this.isBuddhistYear(onlyLocales)) {
+          // zenepay:if buddist convert to christ this gets from the form input
+          year = +this.focusedYear - 543;
+        }
 
         if (!Number.isInteger(year)) {
           year = dayjs().tz(timezone).year();
           this.focusedYear = year;
         }
 
-        if (this.focusedDate.year() === year) {
+        /* if (this.focusedDate.year() === year) {
           return;
-        }
+        } */
 
         this.focusedDate = this.focusedDate.year(year);
       });
