@@ -57,8 +57,8 @@
                     escape: false,
                 )" />
         @else
-            <div x-ignore wire:ignore
-                @if (FilamentView::hasSpaMode()) ax-load="visible"
+            <div x-ignore
+                @if (FilamentView::hasSpaMode()) {{-- format-ignore-start --}}ax-load="visible || event (ax-modal-opened)"{{-- format-ignore-end --}}
                 @else
                     ax-load @endif
                 ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('buddhist-date-time-picker', 'zenepay/filament-buddhist-date-picker') }}"
