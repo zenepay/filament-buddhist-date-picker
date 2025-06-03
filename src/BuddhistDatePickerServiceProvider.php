@@ -37,9 +37,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
         }
     }
 
-    public function packageRegistered(): void
-    {
-    }
+    public function packageRegistered(): void {}
 
     public function bootingPackage()
     {
@@ -52,7 +50,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
             $this->native(false);
             $this::$defaultDateTimeDisplayFormat = 'm/d/Y';
             $hourMode = empty($this->getExtraAttributes()['hourMode']) ? 24 : $this->getExtraAttributes()['hourMode'];
-            $this->view = "filament-buddisht-date-picker::date-time-picker";
+            $this->view("filament-buddisht-date-picker::date-time-picker");
             $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => (int) $weekdaysMin, 'hourMode' => $hourMode]);
             $this->suffixIcon('heroicon-o-calendar', isInline: true);
             return $this;
@@ -64,7 +62,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
             $this::$defaultDateTimeDisplayFormat = 'm/d/Y H:i:s';
             //$hourMode = $this->getExtraAttributes()['hourMode'] ?? 24;
             $hourMode = empty($this->getExtraAttributes()['hourMode']) ? 24 : $this->getExtraAttributes()['hourMode'];
-            $this->view = "filament-buddisht-date-picker::date-time-picker";
+            $this->view("filament-buddisht-date-picker::date-time-picker");
 
             $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => (int) $weekdaysMin, 'hourMode' => $hourMode]);
             return $this;
@@ -78,7 +76,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
             $onlyLocales = $this->getExtraAttributes()['onlyLocales'] ?? 0;
             $weekdaysMin = $this->getExtraAttributes()['onlyLocales'] ?? 1;
             // $this->closeOnDateSelection(true);
-            $this->view = "filament-buddisht-date-picker::date-time-picker";
+            $this->view("filament-buddisht-date-picker::date-time-picker");
             $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => (int) $weekdaysMin, 'hourMode' => $hourMode]);
             $this->suffixIcon('heroicon-o-calendar', isInline: true);
             return $this;
@@ -86,7 +84,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
 
         TextColumn::macro('buddhistDate', function (?string $format = null, bool|array $onlyLocales = true, ?string $timezone = null) {
             /** @var TextColumn $this */
-            $this->isDate = true;
+            $this->date();
 
             $format ??= Table::$defaultDateDisplayFormat;
             BuddhistDatePickerServiceProvider::formatBuddhistDateTime($this, $format, $onlyLocales, $timezone);
@@ -95,7 +93,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
 
         TextColumn::macro('buddhistDateTime', function (?string $format = null, bool|array $onlyLocales = true, ?string $timezone = null) {
             /** @var TextColumn $this */
-            $this->isDateTime = true;
+            $this->dateTime();
 
             $format ??= Table::$defaultDateTimeDisplayFormat;
             $this->formatBuddhistDateTime($this, $format, $onlyLocales, $timezone);

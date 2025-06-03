@@ -21,7 +21,8 @@
         }
     ],
     "require": {
-        "php": "^8.1|^8.2|^8.3",
+        "php": ">=8.2",
+        "filament/filament": "^3.2",
         "spatie/laravel-package-tools": "^1.15.0",
         "blade-ui-kit/blade-heroicons": "^2.3"
     },
@@ -52,7 +53,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "filament/tables": "^3.2",
+        "filament/tables": ">=3.2.115",
         "orchestra/testbench": "^9.1",
         "pestphp/pest-plugin-livewire": "^2.1",
         "pestphp/pest-plugin-watch": "^2.1",
