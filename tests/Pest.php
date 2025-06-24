@@ -7,11 +7,13 @@
 |
 | The closure you provide to your test functions is always bound to a specific PHPUnit test
 | case class. By default, that class is "PHPUnit\Framework\TestCase". Of course, you may
-| need to change it using the "uses()" function to bind a different classes or traits.
+| need to change it using the "pest()" function to bind a different classes or traits.
 |
 */
 
-// uses(Tests\TestCase::class)->in('Feature');
+pest()->extend(Tests\TestCase::class)
+ // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +25,6 @@
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
 */
-
-use Illuminate\Foundation\Application;
-use Zenepay\FilamentBuddhistDatePicker\BuddhistDatePickerServiceProvider;
 
 expect()->extend('toBeOne', function () {
     return $this->toBe(1);
@@ -42,18 +41,7 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-
-
 function something()
 {
     // ..
 }
-
-
-use Tests\TestCase;
-
-
-uses(TestCase::class)->beforeEach(function () {
-    // Interact with your database...
-
-})->in('Feature');
