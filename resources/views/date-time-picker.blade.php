@@ -57,10 +57,9 @@
                     escape: false,
                 )" />
         @else
-            <div x-ignore
-                @if (FilamentView::hasSpaMode()) {{-- format-ignore-start --}}ax-load="visible || event (ax-modal-opened)"{{-- format-ignore-end --}}
+            <div @if (FilamentView::hasSpaMode()) {{-- format-ignore-start --}}ax-load="visible || event (ax-modal-opened)"{{-- format-ignore-end --}}
                 @else
-                    ax-load @endif
+                ax-load @endif
                 ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('buddhist-date-time-picker', 'zenepay/filament-buddhist-date-picker') }}"
                 x-data="buddhistDateTimePickerFormComponent({
                     displayFormat: '{{ convert_date_format($getDisplayFormat())->to('day.js') }}',
