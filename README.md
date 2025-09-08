@@ -97,6 +97,17 @@ This can be done by replace $table->date() with $table->buddhistDate() for dateT
 
 TextColumn::make('start_at')->buddhistDate(format:'m/d/Y',onlyLocales:['th']); // 15/02/2567
 
+### 6. If your project use the same format you may just set at AppServiceProvider
+```php
+  public function boot(): void
+  {
+    DatePicker::configureUsing(function (DatePicker $datePicker) {
+                $datePicker->firstDayOfWeek(0);
+                $datePicker->buddhist('th');
+            });
+  }
+```
+
 
 ```
 ## Test
@@ -188,8 +199,8 @@ DatePicker::make('start_date');
 DatePicker::make('birth_date')->onlyLocales(['th','en'])->weekdaysMin(false);
 
 ```
-### 4. For who might love AM/PM hour mode
-For Datetime format with AM PM 12H, which was available at https://github.com/filamentphp/filament/pull/6441, now it can be combined with Buddhist Era as optional.
+### 4. สำหรับคนที่ชอบแบบ AM/PM 
+ถ้าต้องการแบบ AM PM 12H, ตามนี้ https://github.com/filamentphp/filament/pull/6441, สามารถตั้งค่าได้เช่นกัน.
 ```php
 use Filament\Forms\Components\DateTimePicker;
 
@@ -198,12 +209,22 @@ DatetimePicker::make('start_at')->hourMode(12)->displayFormat('d/m/y h:i A')->se
 
 ```
 
-### 5. Use Buddhist Era in TextColumn in table
-This can be done by replace $table->date() with $table->buddhistDate() for dateTime replace with $table->buddhistDateTime()
+### 5. ใช้ date พศ ใน ตาราง Table
+เพียงเปลี่ยน  date() เป็น buddhistDate() หรือ dateTime() เป็น buddhistDateTime()
 ```php
 
 TextColumn::make('start_at')->buddhistDate(format:'m/d/Y',onlyLocales:['th']); // 15/02/2567
 
+### 6. ถ้าในโปรเจ็กท์ใช้เหมือนกันหมด ก็ทำใน AppServiceProvider ได้เลย แล้วทุก DatePicker ก็จะเป็น พศ เหมือนกัน**
+```php
+  public function boot(): void
+  {
+    DatePicker::configureUsing(function (DatePicker $datePicker) {
+                $datePicker->firstDayOfWeek(0);
+                $datePicker->buddhist('th');
+            });
+  }
+```
 
 ```
 ## Test
@@ -222,3 +243,4 @@ TextColumn::make('start_at')->buddhistDate(format:'m/d/Y',onlyLocales:['th']); /
 ## License
 
 The MIT License (MIT)
+
