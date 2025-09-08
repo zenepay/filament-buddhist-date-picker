@@ -60,6 +60,6 @@ const defaultOptions = {
 
 compile({
   ...defaultOptions,
-  entryPoints: ["../resources/js/buddhist-date-time-picker.js"],
-  outfile: "../dist/js/buddhist-date-time-picker.js",
+  entryPoints: ["../resources/js/date-time-picker.js"],
+  outfile: "../dist/js/date-time-picker.js",
 });

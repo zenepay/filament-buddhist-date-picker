@@ -4,7 +4,9 @@ import localeData from "dayjs/plugin/localeData";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import buddhistEra from "dayjs/plugin/buddhistEra";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 
+dayjs.extend(advancedFormat);
 dayjs.extend(customParseFormat);
 dayjs.extend(localeData);
 dayjs.extend(timezone);
@@ -23,6 +25,7 @@ export default function buddhistDateTimePickerFormComponent({
   onlyLocales,
   weekdaysMin,
   hourMode,
+  defaultFocusedDate,
 }) {
   const timezone = dayjs.tz.guess();
 
@@ -49,6 +52,8 @@ export default function buddhistDateTimePickerFormComponent({
 
     state,
 
+    defaultFocusedDate,
+
     dayLabels: [],
 
     months: [],
@@ -58,7 +63,13 @@ export default function buddhistDateTimePickerFormComponent({
     init: function () {
       dayjs.locale(locales[locale] ?? locales["en"]);
 
-      this.focusedDate = dayjs().tz(timezone);
+      this.$nextTick(() => {
+        this.focusedDate ??= (this.getDefaultFocusedDate() ?? dayjs()).tz(
+          timezone
+        );
+        this.focusedMonth ??= this.focusedDate.month();
+        this.focusedYear ??= this.focusedDate.year();
+      });
 
       let date =
         this.getSelectedDate() ??
@@ -72,6 +83,7 @@ export default function buddhistDateTimePickerFormComponent({
       ) {
         date = null;
       }
+
       if (!Number.isInteger(hourMode)) {
         hourMode = 24;
       }
@@ -273,7 +285,7 @@ export default function buddhistDateTimePickerFormComponent({
       });
     },
 
-    clearState: function () {
+    clearState() {
       this.isClearingState = true;
 
       this.setState(null);
@@ -285,7 +297,7 @@ export default function buddhistDateTimePickerFormComponent({
       this.$nextTick(() => (this.isClearingState = false));
     },
 
-    dateIsDisabled: function (date) {
+    dateIsDisabled(date) {
       if (
         this.$refs?.disabledDates &&
         JSON.parse(this.$refs.disabledDates.value ?? []).some(
@@ -313,13 +325,13 @@ export default function buddhistDateTimePickerFormComponent({
       return false;
     },
 
-    dayIsDisabled: function (day) {
+    dayIsDisabled(day) {
       this.focusedDate ??= dayjs().tz(timezone);
 
       return this.dateIsDisabled(this.focusedDate.date(day));
     },
 
-    dayIsSelected: function (day) {
+    dayIsSelected(day) {
       let selectedDate = this.getSelectedDate();
 
       if (selectedDate === null) {
@@ -335,7 +347,7 @@ export default function buddhistDateTimePickerFormComponent({
       );
     },
 
-    dayIsToday: function (day) {
+    dayIsToday(day) {
       let date = dayjs().tz(timezone);
       this.focusedDate ??= date;
 
@@ -346,31 +358,31 @@ export default function buddhistDateTimePickerFormComponent({
       );
     },
 
-    focusPreviousDay: function () {
+    focusPreviousDay() {
       this.focusedDate ??= dayjs().tz(timezone);
 
       this.focusedDate = this.focusedDate.subtract(1, "day");
     },
 
-    focusPreviousWeek: function () {
+    focusPreviousWeek() {
       this.focusedDate ??= dayjs().tz(timezone);
 
       this.focusedDate = this.focusedDate.subtract(1, "week");
     },
 
-    focusNextDay: function () {
+    focusNextDay() {
       this.focusedDate ??= dayjs().tz(timezone);
 
       this.focusedDate = this.focusedDate.add(1, "day");
     },
 
-    focusNextWeek: function () {
+    focusNextWeek() {
       this.focusedDate ??= dayjs().tz(timezone);
 
       this.focusedDate = this.focusedDate.add(1, "week");
     },
 
-    getDayLabels: function () {
+    getDayLabels() {
       // console.log("weekdaysMin:" + weekdaysMin);
       const labels =
         weekdaysMin == 1 ? dayjs.weekdaysMin() : dayjs.weekdaysShort();
@@ -385,19 +397,19 @@ export default function buddhistDateTimePickerFormComponent({
       ];
     },
 
-    getMaxDate: function () {
+    getMaxDate() {
       let date = dayjs(this.$refs.maxDate?.value);
 
       return date.isValid() ? date : null;
     },
 
-    getMinDate: function () {
+    getMinDate() {
       let date = dayjs(this.$refs.minDate?.value);
 
       return date.isValid() ? date : null;
     },
 
-    getSelectedDate: function () {
+    getSelectedDate() {
       if (this.state === undefined) {
         return null;
       }
@@ -415,7 +427,7 @@ export default function buddhistDateTimePickerFormComponent({
       return date;
     },
 
-    togglePanelVisibility: function () {
+    togglePanelVisibility() {
       if (!this.isOpen()) {
         this.focusedDate =
           this.getSelectedDate() ?? this.getMinDate() ?? dayjs().tz(timezone);
@@ -426,7 +438,7 @@ export default function buddhistDateTimePickerFormComponent({
       this.$refs.panel.toggle(this.$refs.button);
     },
 
-    selectDate: function (day = null) {
+    selectDate(day = null) {
       if (day) {
         this.setFocusedDay(day);
       }
@@ -440,7 +452,7 @@ export default function buddhistDateTimePickerFormComponent({
       }
     },
 
-    setDisplayText: function () {
+    setDisplayText() {
       if (this.isBuddhistYear(onlyLocales)) {
         displayFormat = displayFormat.replace(/YY/g, "BB");
       }
@@ -450,15 +462,15 @@ export default function buddhistDateTimePickerFormComponent({
         : "";
     },
 
-    setMonths: function () {
+    setMonths() {
       this.months = dayjs.months();
     },
 
-    setDayLabels: function () {
+    setDayLabels() {
       this.dayLabels = this.getDayLabels();
     },
 
-    setupDaysGrid: function () {
+    setupDaysGrid() {
       this.focusedDate ??= dayjs().tz(timezone);
 
       this.emptyDaysInFocusedMonth = Array.from(
@@ -476,11 +488,11 @@ export default function buddhistDateTimePickerFormComponent({
       );
     },
 
-    setFocusedDay: function (day) {
+    setFocusedDay(day) {
       this.focusedDate = (this.focusedDate ?? dayjs().tz(timezone)).date(day);
     },
 
-    setState: function (date) {
+    setState(date) {
       if (date === null) {
         this.state = null;
         this.setDisplayText();
@@ -512,11 +524,11 @@ export default function buddhistDateTimePickerFormComponent({
       this.setDisplayText();
     },
 
-    isOpen: function () {
+    isOpen() {
       return this.$refs.panel?.style.display === "block";
     },
 
-    isBuddhistYear: function (onlyLocales = "") {
+    isBuddhistYear(onlyLocales = "") {
       // console.log("onlyLocales:" + onlyLocales);
       if (onlyLocales === "" || onlyLocales == 1) {
         return true;
