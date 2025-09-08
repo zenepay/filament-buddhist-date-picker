@@ -9,11 +9,13 @@
 [![License](https://poser.pugx.org/zenepay/filament-buddhist-date-picker/license)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker)
 [![PHP Version Require](https://poser.pugx.org/zenepay/filament-buddhist-date-picker/require/php)](https://packagist.org/packages/zenepay/filament-buddhist-date-picker)
 
-This package adds buddhistEra support to filament v3 `DatePicker` and `DateTimePicker`.<br>
-https://filamentphp.com/docs/3.x/forms/fields/date-time-picker
+This package adds buddhistEra support to filament v4 `DatePicker` and `DateTimePicker`.<br>
+https://filamentphp.com/docs/4.x/forms/fields/date-time-picker
 
 ## Installation
-
+For Filament 3: you may use version 1.x
+For Filament 4: you may use version 4.x 
+Anyway, it should automatically identify using composer
 You can install the package via composer:
 
 ```bash
@@ -243,4 +245,5 @@ TextColumn::make('start_at')->buddhistDate(format:'m/d/Y',onlyLocales:['th']); /
 ## License
 
 The MIT License (MIT)
+
 
