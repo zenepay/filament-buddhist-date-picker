@@ -21,8 +21,8 @@
         }
     ],
     "require": {
-        "php": ">=8.2",
-        "filament/filament": ">=3.2",
+        "php": "^8.2",
+        "filament/filament": "^3.2",
         "blade-ui-kit/blade-heroicons": ">=2.3"
     },
     "autoload": {
@@ -52,7 +52,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
-        "filament/tables": ">=3.2.115",
         "pestphp/pest": "^3.8",
         "pestphp/pest-plugin-faker": "^3.0",
         "pestphp/pest-plugin-laravel": "^3.2",
