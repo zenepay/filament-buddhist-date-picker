@@ -15,7 +15,7 @@ class BuddhistDatePicker extends DateTimePicker
 
     private bool $weekdaysMin = true;
 
-    protected string | Closure $defaultDateDisplayFormat = 'd/m/Y';
+    protected string | Closure  $defaultDateDisplayFormat = 'd/m/Y';
 
     public function hasTime(): bool
     {

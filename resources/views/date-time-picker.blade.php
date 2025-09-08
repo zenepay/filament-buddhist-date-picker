@@ -29,8 +29,11 @@
     $step = $getStep();
     $type = $getType();
     $livewireKey = $getLivewireKey();
+    $extraAttributes = $getExtraAttributes();
+    $onlyLocales = $getExtraAttributes()['onlyLocales'] ?? '';
+    $weekdaysMin = $getExtraAttributes()['weekdaysMin'] ?? '';
+    $hourMode = $getExtraAttributes()['hourMode'] ?? 12;
 @endphp
-
 <x-dynamic-component :component="$fieldWrapperView" :field="$field" :inline-label-vertical-alignment="\Filament\Support\Enums\VerticalAlignment::Center">
     <x-filament::input.wrapper :disabled="$isDisabled" :inline-prefix="$isPrefixInline" :inline-suffix="$isSuffixInline" :prefix="$prefixLabel" :prefix-actions="$prefixActions"
         :prefix-icon="$prefixIcon" :prefix-icon-color="$prefixIconColor" :suffix="$suffixLabel" :suffix-actions="$suffixActions" :suffix-icon="$suffixIcon" :suffix-icon-color="$suffixIconColor"
@@ -65,7 +68,7 @@
                     ]) }} />
         @else
             <div x-load
-                ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('date-time-picker', 'zenepay/filament-buddhist-date-picker') }}"
+                x-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('buddhist-date-time-picker', 'zenepay/filament-buddhist-date-picker') }}"
                 x-data="dateTimePickerFormComponent({
                     defaultFocusedDate: @js($defaultFocusedDate),
                     displayFormat: '{{ convert_date_format($getDisplayFormat())->to('day.js') }}',
@@ -74,6 +77,9 @@
                     locale: @js($getLocale()),
                     shouldCloseOnDateSelection: @js($shouldCloseOnDateSelection()),
                     state: $wire.{{ $applyStateBindingModifiers("\$entangle('{$statePath}')") }},
+                    onlyLocales: '{{ $onlyLocales }}',
+                    weekdaysMin: '{{ $weekdaysMin }}',
+                    hourMode: {{ $hourMode }},
                 })" wire:ignore
                 wire:key="{{ $livewireKey }}.{{ substr(md5(serialize([$disabledDates, $isDisabled, $isReadOnly, $maxDate, $minDate])), 0, 64) }}"
                 x-on:keydown.esc="isOpen() && $event.stopPropagation()" {{ $getExtraAlpineAttributeBag() }}>
@@ -106,7 +112,6 @@
 
                 <div x-ref="panel" x-cloak x-float.placement.bottom-start.offset.flip.shift="{ offset: 8 }" wire:ignore
                     wire:key="{{ $livewireKey }}.panel" @class(['fi-fo-date-time-picker-panel'])>
-
                     @if ($hasDate())
                         <div class="fi-fo-date-time-picker-panel-header">
                             <select x-model="focusedMonth" class="fi-fo-date-time-picker-month-select">
@@ -147,8 +152,9 @@
 
                     @if ($hasTime)
                         <div class="fi-fo-date-time-picker-time-inputs">
-                            <input max="23" min="0" step="{{ $getHoursStep() }}" type="number"
-                                inputmode="numeric" x-model.debounce="hour" />
+                            <input max="{{ $hourMode == 12 ? 12 : 23 }}" min="{{ $hourMode == 12 ? 1 : 0 }}"
+                                step="{{ $getHoursStep() }}" type="number" inputmode="numeric"
+                                x-model.debounce="hour" />
 
                             <span class="fi-fo-date-time-picker-time-input-separator">
                                 :
@@ -164,6 +170,14 @@
 
                                 <input max="59" min="0" step="{{ $getSecondsStep() }}" type="number"
                                     inputmode="numeric" x-model.debounce="second" />
+                            @endif
+                            @if ($hourMode == 12)
+                                <select x-model.debounce="meridiem"
+                                    dusk="filament.forms.{{ $getStatePath() }}.meridiem" style="background-image:none"
+                                    class="px-1 py-0 text-lg font-medium text-gray-700 bg-transparent border-none outline-none cursor-pointer focus:ring-0 dark:text-white">
+                                    <option value="am">AM</option>
+                                    <option value="pm">PM</option>
+                                </select>
                             @endif
                         </div>
                     @endif
