@@ -78,6 +78,7 @@ class BuddhistDatePickerServiceProvider extends PackageServiceProvider
             $weekdaysMin = $this->getExtraAttributes()['onlyLocales'] ?? 1;
             // $this->closeOnDateSelection(true);
             $this->view("filament-buddhist-date-picker::date-time-picker");
+            $this->viewData(['defaultFocusedDate' => $this?->getDefaultFocusedDate() ?? null]);
             $this->extraAttributes(['onlyLocales' => is_array($onlyLocales) ? implode(',', $onlyLocales) : (is_bool($onlyLocales) ? (int) $onlyLocales : $onlyLocales), 'weekdaysMin' => (int) $weekdaysMin, 'hourMode' => $hourMode]);
             $this->suffixIcon('heroicon-o-calendar', isInline: true);
             return $this;
