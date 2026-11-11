@@ -2,4 +2,4 @@
 /.git
 /vendor
 /node_modules
-/.composer.lock
+/composer.lock
